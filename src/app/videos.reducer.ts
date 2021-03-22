@@ -15,12 +15,9 @@ const reducer = createReducer(
   on(VideoActions.add, (state, { video }) => ({
     videos: [...state.videos, video],
   })),
-  on(VideoActions.remove, (state, { video }) => {
-    console.log(video);
-    return {
-      videos: state.videos.filter((v) => v.id !== video.id),
-    };
-  })
+  on(VideoActions.remove, (state, { video }) => ({
+    videos: state.videos.filter((v) => v.id !== video.id),
+  }))
 );
 
 export function videoReducer(state: VideoState | undefined, action: Action) {

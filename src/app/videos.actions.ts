@@ -1,27 +1,9 @@
 import { Action, createAction, props } from '@ngrx/store';
 import { Video } from './videos.model';
 
-export enum VideoActionTypes {
-  Add = '[Video] Add Video',
-  Delete = '[Video] Delete Video',
-}
-
-// export class Add implements Action {
-//   readonly type = VideoActionTypes.Add;
-//   constructor(public payload: Video) {}
-// }
-
-// export class Delete implements Action {
-//   readonly type = VideoActionTypes.Delete;
-//   constructor(public payload: Video) {}
-// }
-
-export const add = createAction(
-  VideoActionTypes.Add,
-  props<{ video: Video }>()
-);
+export const add = createAction('[Video] Add Video', props<{ video: Video }>());
 export const remove = createAction(
-  VideoActionTypes.Delete,
+  '[Video] Delete Video',
   props<{ video: Video }>()
 );
 

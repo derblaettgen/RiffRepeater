@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 
 import { Video } from './videos.model';
 import * as VideoAction from './videos.actions';
-import { remove, VideoActionTypes } from './videos.actions';
 import { VideoState } from './videos.reducer';
 
 interface AppState {
@@ -54,7 +53,7 @@ export class AppComponent {
   }
 
   deleteVideo(video: Video) {
-    this.store.dispatch(remove({ video }));
+    this.store.dispatch(VideoAction.remove({ video }));
   }
 
   ngOnInit() {
