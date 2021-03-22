@@ -39,5 +39,16 @@
   <button (click)="switchLooper()">
     {{ isLooping ? "STOP LOOP" : "START LOOP" }}
   </button>
+
+  <h4>Simple Reducer</h4>
+  <div>{{ message$ | async }}</div>
+  <button (click)="spanishMessage()">SPAN</button>
+  <button (click)="frenchMessage()">FREN</button>
+
+  <h4>Video List</h4>
+  <div *ngFor="let video of (videos$ | async)?.videos">
+    <div (click)="deleteVideo(video)">{{ video.id }}</div>
+  </div>
+
   <router-outlet></router-outlet>
 </div>

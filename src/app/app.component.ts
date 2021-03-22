@@ -1,5 +1,18 @@
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, Renderer2, ViewChild } from '@angular/core';
 import { YouTubePlayer } from '@angular/youtube-player';
+
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { Video } from './videos.model';
+import * as VideoAction from './videos.actions';
+import { remove, VideoActionTypes } from './videos.actions';
+import { VideoState } from './videos.reducer';
+
+interface AppState {
+  message: string;
+  videos: VideoState;
+}
 
 @Component({
   selector: 'app-root',
@@ -24,7 +37,25 @@ export class AppComponent {
     | YouTubePlayer
     | undefined;
 
-  constructor(private renderer: Renderer2) {}
+  message$: Observable<string>;
+  videos$: Observable<VideoState>;
+
+  constructor(private renderer: Renderer2, private store: Store<AppState>) {
+    this.message$ = this.store.select('message');
+    this.videos$ = this.store.select('videos');
+  }
+
+  spanishMessage() {
+    this.store.dispatch({ type: 'SPANISH' });
+  }
+
+  frenchMessage() {
+    this.store.dispatch({ type: 'FRENCH' });
+  }
+
+  deleteVideo(video: Video) {
+    this.store.dispatch(remove({ video }));
+  }
 
   ngOnInit() {
     if (!this.apiLoaded) {
